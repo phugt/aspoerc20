@@ -328,7 +328,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ASPOToken_flat.sol": "ASPOToken"
+			"contracts/ASPOToken.sol": "ASPOToken"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -342,11 +342,44 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/ASPOToken_flat.sol": {
-			"keccak256": "0xe11ac80ff09c90e09a192e77391d0e3d000440943cd6cf0f8a7af153862e24b8",
+		"@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+			"keccak256": "0xb03df8481a954604ad0c9125680893b2e3f7ff770fe470e38b89ac61b84e8072",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://560d7d2f273d1199224341fd04e76ae2e5aec21b71079fa606c172fc5e21ab67",
-				"dweb:/ipfs/QmcuTBEg4NgwXL7L9rMi5QbaA4VjjKp2psbMf55q8WM2nS"
+				"bzz-raw://b34655953d18ba3a45b762fb6bdbb6549af69a27435e10ece178742bf70baf45",
+				"dweb:/ipfs/QmcqjUoFLLMyx7dbwSHUnDBH6aphkVHXWQvQRRev5EAWEh"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x027b891937d20ccf213fdb9c31531574256de774bda99d3a70ecef6e1913ed2a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://087318b21c528119f649899f5b5580566dd8d7b0303d4904bd0e8580c3545f14",
+				"dweb:/ipfs/Qmbn5Mj7aUn8hJuQ8VrQjjEXRsXyJKykgnjR9p4C3nfLtL"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+			"keccak256": "0x83fe24f5c04a56091e50f4a345ff504c8bff658a76d4c43b16878c8f940c53b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d4c3df1a7ca104b633a7d81c6c6f5192367d150cd5a32cba81f7f27012729013",
+				"dweb:/ipfs/QmSim72e3ZVsfgZt8UceCvbiSuMRHR6WDsiamqNzZahGSY"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x90565a39ae45c80f0468dc96c7b20d0afc3055f344c8203a0c9258239f350b9f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://26e8b38a7ac8e7b4463af00cf7fff1bf48ae9875765bf4f7751e100124d0bc8c",
+				"dweb:/ipfs/QmWcsmkVr24xmmjfnBQZoemFniXjj3vwT78Cz6uqZW1Hux"
+			]
+		},
+		"contracts/ASPOToken.sol": {
+			"keccak256": "0x87dc3cbfb6fb6d5d02a7df6a239d878ea040585957be6cf99e97b98409d5ae7c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c7c6079cc79337ebfb4c65bac4a898f52fe6603aff2baf62ef137d951985be00",
+				"dweb:/ipfs/QmYcyzenCGkgy9GXZajbW3KMQqhoUnqk77RkbYBRGJDzse"
 			]
 		}
 	},

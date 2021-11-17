@@ -6,9 +6,10 @@
 	"output": {
 		"abi": [],
 		"devdoc": {
-			"details": "Provides information about the current execution context, including the sender of the transaction and its data. While these are generally available via msg.sender and msg.data, they should not be accessed in such a direct manner, since when dealing with meta-transactions the account sending and paying for execution may not be the actual sender (as far as an application is concerned). This contract is only required for intermediate, library-like contracts.",
+			"details": "Wrappers around ERC20 operations that throw on failure (when the token contract returns false). Tokens that return no value (and instead revert or throw on failure) are also supported, non-reverting calls are assumed to be successful. To use this library you can add a `using SafeERC20 for IERC20;` statement to your contract, which allows you to call the safe operations as `token.safeTransfer(...)`, etc.",
 			"kind": "dev",
 			"methods": {},
+			"title": "SafeERC20",
 			"version": 1
 		},
 		"userdoc": {
@@ -19,7 +20,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TokenVesting_flat.sol": "Context"
+			"contracts/TokenVesting_flat.sol": "SafeERC20"
 		},
 		"evmVersion": "london",
 		"libraries": {},

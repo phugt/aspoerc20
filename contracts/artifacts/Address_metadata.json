@@ -6,7 +6,7 @@
 	"output": {
 		"abi": [],
 		"devdoc": {
-			"details": "Provides information about the current execution context, including the sender of the transaction and its data. While these are generally available via msg.sender and msg.data, they should not be accessed in such a direct manner, since when dealing with meta-transactions the account sending and paying for execution may not be the actual sender (as far as an application is concerned). This contract is only required for intermediate, library-like contracts.",
+			"details": "Collection of functions related to the address type",
 			"kind": "dev",
 			"methods": {},
 			"version": 1
@@ -19,7 +19,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TokenVesting_flat.sol": "Context"
+			"contracts/TokenVesting_flat.sol": "Address"
 		},
 		"evmVersion": "london",
 		"libraries": {},

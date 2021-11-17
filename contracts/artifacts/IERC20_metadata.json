@@ -230,7 +230,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ASPOToken_flat.sol": "IERC20"
+			"contracts/TokenVesting_flat.sol": "IERC20"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -244,11 +244,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/ASPOToken_flat.sol": {
-			"keccak256": "0xe11ac80ff09c90e09a192e77391d0e3d000440943cd6cf0f8a7af153862e24b8",
+		"contracts/TokenVesting_flat.sol": {
+			"keccak256": "0x5ae8f4b2eb25d5370e044c80eb86f142fbd6292914fa2f61e4fbaa29e8d03d5d",
 			"urls": [
-				"bzz-raw://560d7d2f273d1199224341fd04e76ae2e5aec21b71079fa606c172fc5e21ab67",
-				"dweb:/ipfs/QmcuTBEg4NgwXL7L9rMi5QbaA4VjjKp2psbMf55q8WM2nS"
+				"bzz-raw://33df4dfdcefaab32950ae09e71fb02bc4886cae70def66829699c2309a641bf8",
+				"dweb:/ipfs/QmcjcbLCE55i3t3xjCtFJRh5YvCTY1zuydVNHLqUnN8HKF"
 			]
 		}
 	},
