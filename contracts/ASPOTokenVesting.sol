@@ -29,7 +29,6 @@ contract ASPOTokenVesting is Ownable {
     // Durations and timestamps are expressed in UNIX time, the same units as block.timestamp.
     uint256 private _cliff;
     uint256 private _start;
-    uint256 private _startPercent;
     uint256 private _duration;
 
     bool private _revocable;
@@ -48,12 +47,11 @@ contract ASPOTokenVesting is Ownable {
      * @param duration duration in seconds of the period in which the tokens will vest
      * @param revocable whether the vesting is revocable or not
      */
-    constructor (address beneficiary, uint256 start, uint256 cliffDuration, uint256 duration, uint256 startPercent, bool revocable) public {
+    constructor (address beneficiary, uint256 start, uint256 cliffDuration, uint256 duration, bool revocable) public {
         require(beneficiary != address(0), "TokenVesting: beneficiary is the zero address");
         // solhint-disable-next-line max-line-length
         require(cliffDuration <= duration, "TokenVesting: cliff is longer than duration");
         require(duration > 0, "TokenVesting: duration is 0");
-        require(startPercent <= 100, "TokenVesting: start percent must be less than 100");
         // solhint-disable-next-line max-line-length
         require(start.add(duration) > block.timestamp, "TokenVesting: final time is before current time");
 
@@ -62,7 +60,6 @@ contract ASPOTokenVesting is Ownable {
         _duration = duration;
         _cliff = start.add(cliffDuration);
         _start = start;
-        _startPercent = startPercent;
     }
 
     /**
@@ -183,24 +180,14 @@ contract ASPOTokenVesting is Ownable {
         uint256 currentBalance = token.balanceOf(address(this));
         uint256 totalBalance = currentBalance.add(_released[address(token)]).add(_refunded[address(token)]);
 
-        uint256 balance;
         if (block.timestamp < _cliff) {
-            balance = 0;
+            return 0;
         } else if (block.timestamp >= _start.add(_duration) && _revoked[address(token)] == 0) {
-            balance = totalBalance;
-        } else if (_revoked[address(token)] > 0) {
-            balance = totalBalance.mul(_revoked[address(token)].sub(_start)).div(_duration);
-        } else {
-            balance = totalBalance.mul(block.timestamp.sub(_start)).div(_duration);
-        }
-        if (block.timestamp >= _cliff && _startPercent > 0) {
-            balance = balance.add(totalBalance.mul(_startPercent).div(100));
-        }
-        
-        if(balance > totalBalance){
             return totalBalance;
+        } else if (_revoked[address(token)] > 0) {
+            return totalBalance.mul(_revoked[address(token)].sub(_start)).div(_duration);
+        } else {
+            return totalBalance.mul(block.timestamp.sub(_start)).div(_duration);
         }
-        
-        return balance;
     }
 }
