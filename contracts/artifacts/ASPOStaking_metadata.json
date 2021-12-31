@@ -9,32 +9,46 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "beneficiary",
+						"name": "token",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "start",
+						"name": "stakeAmount",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "cliffDuration",
+						"name": "stakeDuration",
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
-						"name": "duration",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "revocable",
-						"type": "bool"
+						"internalType": "address",
+						"name": "nftReward",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "Canceled",
+				"type": "event"
 			},
 			{
 				"anonymous": false,
@@ -63,9 +77,15 @@
 						"internalType": "address",
 						"name": "token",
 						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
 					}
 				],
-				"name": "TokenVestingRevoked",
+				"name": "Rewarded",
 				"type": "event"
 			},
 			{
@@ -80,47 +100,130 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "id",
 						"type": "uint256"
 					}
 				],
-				"name": "TokensReleased",
+				"name": "Staked",
 				"type": "event"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "cancelStake",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "getStake",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "holder",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ASPOStaking.Stake",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
-				"name": "beneficiary",
+				"name": "getStakes",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "holder",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ASPOStaking.Stake[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "myStakes",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "holder",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "startTime",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct ASPOStaking.Stake[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nftReward",
 				"outputs": [
 					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "cliff",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "duration",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -140,54 +243,36 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "contract IERC20",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"name": "releasable",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "contract IERC20",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"name": "release",
+				"inputs": [],
+				"name": "pause",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "paused",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
-						"internalType": "address",
+						"internalType": "contract IERC20",
 						"name": "token",
 						"type": "address"
 					}
 				],
-				"name": "released",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
+				"name": "recoverTokens",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -198,13 +283,98 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "revocable",
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "reward",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "rewardable",
 				"outputs": [
 					{
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stake",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stakeAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stakeDuration",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stop",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "stopped",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -218,33 +388,7 @@
 						"type": "address"
 					}
 				],
-				"name": "revoke",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"name": "revoked",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "start",
+				"name": "tokensToBeReturned",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -269,123 +413,37 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "contract IERC20",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"name": "vested",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
+				"inputs": [],
+				"name": "unpause",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
 		"devdoc": {
-			"details": "A token holder contract that can release its token balance gradually like a typical vesting scheme, with a cliff and vesting period. Optionally revocable by the owner.",
 			"kind": "dev",
 			"methods": {
-				"beneficiary()": {
-					"returns": {
-						"_0": "the beneficiary of the tokens."
-					}
-				},
-				"cliff()": {
-					"returns": {
-						"_0": "the cliff time of the token vesting."
-					}
-				},
-				"constructor": {
-					"details": "Creates a vesting contract that vests its balance of any ERC20 token to the beneficiary, gradually in a linear fashion until start + duration. By then all of the balance will have vested.",
-					"params": {
-						"beneficiary": "address of the beneficiary to whom vested tokens are transferred",
-						"cliffDuration": "duration in seconds of the cliff in which tokens will begin to vest",
-						"duration": "duration in seconds of the period in which the tokens will vest",
-						"revocable": "whether the vesting is revocable or not",
-						"start": "the time (as Unix time) at which point vesting starts"
-					}
-				},
-				"duration()": {
-					"returns": {
-						"_0": "the duration of the token vesting."
-					}
-				},
 				"owner()": {
 					"details": "Returns the address of the current owner."
-				},
-				"releasable(address)": {
-					"returns": {
-						"_0": "the releasable amount of the token vesting."
-					}
-				},
-				"release(address)": {
-					"params": {
-						"token": "ERC20 token which is being vested"
-					}
-				},
-				"released(address)": {
-					"returns": {
-						"_0": "the amount of the token released."
-					}
 				},
 				"renounceOwnership()": {
 					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
 				},
-				"revocable()": {
-					"returns": {
-						"_0": "true if the vesting is revocable."
-					}
-				},
-				"revoke(address)": {
-					"params": {
-						"token": "ERC20 token which is being vested"
-					}
-				},
-				"revoked(address)": {
-					"returns": {
-						"_0": "true if the token is revoked."
-					}
-				},
-				"start()": {
-					"returns": {
-						"_0": "the start time of the token vesting."
-					}
-				},
 				"transferOwnership(address)": {
 					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
-				},
-				"vested(address)": {
-					"returns": {
-						"_0": "the vested amount of the token vesting."
-					}
 				}
 			},
-			"title": "TokenVesting",
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {
-				"release(address)": {
-					"notice": "Transfers vested tokens to beneficiary."
-				},
-				"revoke(address)": {
-					"notice": "Allows the owner to revoke the vesting. Tokens already vested remain in the contract, the rest are returned to the owner."
-				}
-			},
+			"methods": {},
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ASPOTokenVesting.sol": "ASPOTokenVesting"
+			"contracts/ASPOStaking.sol": "ASPOStaking"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -407,12 +465,44 @@
 				"dweb:/ipfs/QmXRoFGUgfsaRkoPT5bxNMtSayKTQ8GZATLPXf69HcRA51"
 			]
 		},
+		"@openzeppelin/contracts/security/Pausable.sol": {
+			"keccak256": "0xe68ed7fb8766ed1e888291f881e36b616037f852b37d96877045319ad298ba87",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1d491a2ca79dbf44bc02e876e21a5847a2cbcc011188532ad8662cdc1c134a4e",
+				"dweb:/ipfs/QmUQXhSV8ZvHLzfdG89ZNSh1nLrAYyjnNBLznJGwGcwVk8"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+			"keccak256": "0xd1d8caaeb45f78e0b0715664d56c220c283c89bf8b8c02954af86404d6b367f8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://300a0cc7be3b26c96c22a47ffa9530a585e1c4f2dba3021d9bf309dc63007487",
+				"dweb:/ipfs/QmQmxsvxK6CaJmQ4D8vDCYPLHMqcMmZLcBqedG4GFAbzu9"
+			]
+		},
 		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
 			"keccak256": "0x61437cb513a887a1bbad006e7b1c8b414478427d33de47c5600af3c748f108da",
 			"license": "MIT",
 			"urls": [
 				"bzz-raw://2c3d0973630ed74f2b5ce3944677a885dc70ec32fc83b35f55045a10224da32b",
 				"dweb:/ipfs/QmbefZ5RoEZKNHXCALfh683PnaNYzKPcKMFjyY1DVAgq8A"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol": {
+			"keccak256": "0x978847fbff92d66d27d8767402a90ba996970b1936b372406aa17f5492bd8dc5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1414cb92779420b50d3e796b47bad6ea800ef1805bc6f9bf35a3ccb4e17db3dc",
+				"dweb:/ipfs/QmaMzwYqLiivfaWSgqeaAPboBtJjVD1hSrH48p7ExJZ7DG"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+			"keccak256": "0x8de418a5503946cabe331f35fe242d3201a73f67f77aaeb7110acb1f30423aca",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a376d3dda2cb70536c0a45c208b29b34ac560c4cb4f513a42079f96ba47d2dd",
+				"dweb:/ipfs/QmZQg6gn1sUpM8wHzwNvSnihumUCAhxD119MpXeKp8B9s8"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
@@ -447,11 +537,18 @@
 				"dweb:/ipfs/QmfYuZxRfx2J2xdk4EXN7jKg4bUYEMTaYk9BAw9Bqn4o2Y"
 			]
 		},
-		"contracts/ASPOTokenVesting.sol": {
-			"keccak256": "0x83f2f08ef66a45422a687c03d47781ef86907c0a2132269d1c8df92fc7cec173",
+		"contracts/ASPOStaking.sol": {
+			"keccak256": "0x9c66452b45b44c14e323cc805e5d33a13ed14e3a49fa28bedbcb21da0bd15748",
 			"urls": [
-				"bzz-raw://b29e1c2413a488ded1187a2e4292ecaa27aabef9360ce6eafaa98cf1fe5d0ab5",
-				"dweb:/ipfs/QmV1WBmbhmsCSY6NLqvX6N2iuA9LKPWypSNwPQ1RZWeVZ8"
+				"bzz-raw://681727410995e35631a34f79f1c9e0a786adf80554fd76e7978fa017db7d8e8b",
+				"dweb:/ipfs/QmRXrcKU5EvVVKDgCPxxvBkSwCTLt97zGbaRRRkM1ciUdV"
+			]
+		},
+		"contracts/Recoverable.sol": {
+			"keccak256": "0xb11a281a1a3176b9c75c77b6a40a8d42e04db1cd2013cf1f7b250d22a49c91b1",
+			"urls": [
+				"bzz-raw://a5ab7b209289b933b7d193bd62d9e08ed6d8445106b283edb45b801c2c417b8b",
+				"dweb:/ipfs/QmW3ftbCvJ9dF9DYUH4kkjv5p8j4qaKh3wXFee41wDeFko"
 			]
 		}
 	},
