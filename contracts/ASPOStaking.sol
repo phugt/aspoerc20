@@ -21,7 +21,7 @@ contract ASPOStaking is Ownable, Recoverable {
     address private _token;
     uint256 private _stakeAmount;
     uint256 private _stakeDuration;
-    uint private _id;
+    uint private _id = 1;
 
     function _getId() private returns (uint) {
         return _id++;
@@ -103,6 +103,7 @@ contract ASPOStaking is Ownable, Recoverable {
         for (uint i = 0; i < _stakes.length; i++) {
             if (_stakes[i].holder == msg.sender) {
                 results[j] = _stakes[i];
+                j++;
             }
         }
         return results;

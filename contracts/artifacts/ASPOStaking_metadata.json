@@ -538,10 +538,10 @@
 			]
 		},
 		"contracts/ASPOStaking.sol": {
-			"keccak256": "0x9c66452b45b44c14e323cc805e5d33a13ed14e3a49fa28bedbcb21da0bd15748",
+			"keccak256": "0x5b53e1ee60792c42085ecb015d7a6709a9d8fd25742dec95e7ff6568b8e47a54",
 			"urls": [
-				"bzz-raw://681727410995e35631a34f79f1c9e0a786adf80554fd76e7978fa017db7d8e8b",
-				"dweb:/ipfs/QmRXrcKU5EvVVKDgCPxxvBkSwCTLt97zGbaRRRkM1ciUdV"
+				"bzz-raw://3dbb545a26fdb0da949dd1d872e0e15c62d280c0fbb6d0453d6ce358ca10b106",
+				"dweb:/ipfs/QmYa5MFf2ktuyLQB9kN7yWgW4MdX5uv2t3Ppo5idocrEES"
 			]
 		},
 		"contracts/Recoverable.sol": {
